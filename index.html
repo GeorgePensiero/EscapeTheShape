@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Escape the Shape</title>
+        <style>
+            * { padding: 0; margin: 0; }
+            canvas { background: #eee; display: block; margin: 0 auto; }
+        </style>
+        <script type="text/javascript" src="dist/bundle.js"></script>
+    </head>
+    <body>
+        <canvas id="myCanvas" width="500" height="500"></canvas>
+
+        <script>
+            const canvas = document.getElementById("myCanvas");
+            const ctx = canvas.getContext("2d");
+            // let numSides = 8,
+            // size = 30,
+            // Xcenter = canvas.width / 2,
+            // Ycenter = canvas.height / 2;
+
+            // ctx.beginPath();
+            // ctx.moveTo (Xcenter + size * Math.cos(0), Ycenter + size * Math.sin(0));
+
+            // for(let i = 1; i <= numSides; i += 1) {
+            //     ctx.lineTo (Xcenter + size * Math.cos(i * 2 * Math.PI / numSides), Ycenter + size * Math.sin(i * 2 * Math.PI / numSides));
+            // }
+
+            // ctx.strokeStyle = "#000000";
+            // ctx.lineWidth = 1;
+            // ctx.stroke();
+            ctx.beginPath();
+            ctx.arc(canvas.width / 2, canvas.height / 2, 48, 0, Math.PI * 2, true)
+            ctx.stroke();
+
+           
+            function drawTriangle(){
+                 ctx.beginPath();
+                ctx.moveTo(canvas.width / 2 - 60, canvas.height / 2);
+                ctx.lineTo(canvas.width / 2 - 50, canvas.height / 2 - 10);
+                ctx.lineTo(canvas.width / 2 - 50, canvas.width / 2 + 10);
+                
+                ctx.translate(150, 75);
+                ctx.rotate(Math.PI / 2);
+                ctx.translate(-150, -75);
+                ctx.fill();
+                
+            }
+
+            drawTriangle();
+        </script>
+    </body>
+</html>
