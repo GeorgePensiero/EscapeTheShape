@@ -16,7 +16,8 @@ export default class Game {
 
 
     addWall(){
-        const wall = new Wall(this.ctx, this.canvas.width / 2, this.canvas.height / 2, this.canvas.width / 2, COLOR_SCHEME[Math.floor(Math.random() * COLOR_SCHEME.length)])
+        const rotations = [-.001, .001];
+        const wall = new Wall(this.ctx, this.canvas.width / 2, this.canvas.height / 2, this.canvas.width / 2, COLOR_SCHEME[Math.floor(Math.random() * COLOR_SCHEME.length)], rotations[Math.floor(Math.random() * 2)])
         this.walls.push(wall);
         this.timer = null;
     }

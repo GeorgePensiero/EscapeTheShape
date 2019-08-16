@@ -1,13 +1,14 @@
 
 export default class Wall {
-    constructor(ctx, x, y, radius, color) {
+    constructor(ctx, x, y, radius, color, rotation) {
         this.ctx = ctx;
         this.x = x;
         this.y = y;
         this.radius = radius;
         this.color = color;
         this.time = new Date().getTime();
-        this.angle = 0;
+        this.angle = Math.random() * 360;
+        this.rotation = rotation;
     }
 
     draw(){
@@ -19,7 +20,7 @@ export default class Wall {
         this.ctx.strokeStyle = this.color;
         this.ctx.lineWidth = 8;
         this.ctx.stroke();
-        this.angle += diff * 0.001;
+        this.angle += diff * this.rotation;
         this.angle %= 2 * Math.PI;
     }
 
