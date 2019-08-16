@@ -10,12 +10,15 @@ export default class Game {
         this.canvas = canvas;
         this.player = new Player(this.canvas, this.ctx)
         this.walls = [];
+        this.timer = null;
+        
     }
 
 
     addWall(){
         const wall = new Wall(this.ctx, this.canvas.width / 2, this.canvas.height / 2, this.canvas.width / 2, COLOR_SCHEME[Math.floor(Math.random() * COLOR_SCHEME.length)])
         this.walls.push(wall);
+        this.timer = null;
     }
 
     allWalls(){
@@ -40,9 +43,10 @@ export default class Game {
     }
 
     update(){
-        if(this.walls.length < 8){
-            setTimeout(this.addWall(), 1000);
+        if(this.walls.length < 8 && this.timer === null){
+            this.timer = setTimeout(() => this.addWall(), 1000);
         }
+        if (this.walls.length > 0 && this.walls[0].radius < 30) { this.walls.shift()}
         this.draw();
         }
 }
