@@ -16,7 +16,7 @@ export default class Wall {
         let diff = newTime - this.time;
         this.time = newTime;
         this.ctx.beginPath();
-        this.ctx.arc(this.x,  this.y, this.radius, 0 + this.angle, 2 * Math.PI - .90 + this.angle, false);
+        this.ctx.arc(this.x,  this.y, this.radius, 0 + this.angle, 2 * Math.PI - 1.2 + this.angle, false);
         this.ctx.strokeStyle = this.color;
         this.ctx.lineWidth = 8;
         this.ctx.stroke();
