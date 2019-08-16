@@ -42,7 +42,7 @@ export default class Player {
     }
 
     handlePress(e) {
-
+        e.preventDefault();
         switch (e.key) {
             case 'ArrowUp':
                 this.playerPos = "up";

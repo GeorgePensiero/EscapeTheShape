@@ -9,7 +9,7 @@ export default class GameView {
 
 
     animate() {
-        this.game.draw(this.ctx);
+        this.game.update();
         requestAnimationFrame(this.animate.bind(this));
     }
 }
