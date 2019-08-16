@@ -9,11 +9,9 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const ctx = canvas.getContext("2d");
 
-    
 
-    const game = new Game(canvas, ctx, handlePress);
-    const gameView = new GameView(canvas, game, ctx);
-    
+    const gameView = new GameView(canvas, ctx);
+    document.addEventListener('keydown', e => gameView.game.player.handlePress(e));
     gameView.animate();
 });
 
