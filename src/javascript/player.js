@@ -4,7 +4,7 @@ export default class Player {
         this.ctx = ctx;
         this.size = 5;
         this.radius = 55;
-        this.speed = 5;
+        this.speed = 7;
         this.direction = 0;
         this.angle = 30;
         this.playerPos = "left";
@@ -82,6 +82,10 @@ export default class Player {
                 this.direction = 1;
                 break;
         }
+    }
+
+    handleKeyUp(e){
+        this.direction = 0;
     }
 }
 
