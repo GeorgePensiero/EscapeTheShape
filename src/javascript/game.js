@@ -40,7 +40,7 @@ export default class Game {
         this.ctx.strokeRect(centerX - 25, centerY - 25, 50, 50);
         this.ctx.stroke();
         
-        this.player.draw();
+        this.player.draw(5);
     }
 
     update(){
