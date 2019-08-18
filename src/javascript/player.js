@@ -65,6 +65,8 @@ export default class Player {
         this.ctx.closePath();
 
         this.ctx.fill();
+
+        
     }
     handlePress(e) {
         e.preventDefault();

@@ -1,3 +1,4 @@
+import Gap from "./gap";
 
 export default class Wall {
     constructor(ctx, x, y, radius, color, rotation) {
@@ -9,6 +10,7 @@ export default class Wall {
         this.time = new Date().getTime();
         this.angle = Math.random() * 360;
         this.rotation = rotation;
+        this.gap = new Gap(this.ctx, this.x, this.y, this.radius, this.angle, this.rotation, this.time);
     }
 
     draw(){
@@ -21,7 +23,9 @@ export default class Wall {
         this.ctx.lineWidth = 8;
         this.ctx.stroke();
         this.angle += diff * this.rotation;
+        this.gap.angle += diff * this.rotation;
         this.angle %= 2 * Math.PI;
+        this.gap.angle %= 2 * Math.PI;
     }
 
     update(){
@@ -29,5 +33,6 @@ export default class Wall {
             this.radius -= 3;
         } 
         this.draw();
+        this.gap.update();
     }
 }
