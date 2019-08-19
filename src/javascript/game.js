@@ -16,8 +16,8 @@ export default class Game {
 
 
     addWall(){
-        const rotations = [-.001, .001, -.002, .002, -.002, -.003, .003];
-        const wall = new Wall(this.ctx, this.canvas.width / 2, this.canvas.height / 2, this.canvas.width / 2, COLOR_SCHEME[Math.floor(Math.random() * COLOR_SCHEME.length)], rotations[Math.floor(Math.random() * rotations.length)])
+        const rotations = [-.0015, .0015, -.002, .002, -.002, -.003, .003];
+        const wall = new Wall(this.ctx, this.canvas.width / 2, this.canvas.height / 2, this.canvas.width / 2, "#388697", rotations[Math.floor(Math.random() * rotations.length)])
         this.walls.push(wall);
         this.timer = null;
     }
@@ -33,15 +33,16 @@ export default class Game {
         this.ctx.clearRect(0, 0, DIM_X, DIM_Y);
         const centerX = DIM_X / 2;
         const centerY = DIM_Y / 2;
+        this.ctx.lineWidth = 1;
+        this.ctx.strokeStyle = "black"
+        this.ctx.strokeRect(centerX - 25, centerY - 25, 50, 50);
         this.walls.forEach(wall => {
             wall.update();
+            // wall.gap.update();
         })
     
-        this.ctx.strokeRect(centerX - 25, centerY - 25, 50, 50);
-        this.ctx.strokeStyle = "black"
-        this.ctx.lineWidth = 1;
-        this.ctx.stroke();
-        
+        // this.ctx.stroke();
+        // this.ctx.closePath();
         this.player.draw(5);
     }
 

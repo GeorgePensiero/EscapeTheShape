@@ -53,18 +53,22 @@ export default class Player {
         else if(this.angle > 360){
             this.angle %= 360;
         }
-        this.ctx.save();
+        // this.ctx.save();
         this.ctx.translate(dx, dy);
         this.ctx.rotate(this.angle * Math.PI / 180);
-        this.ctx.restore();
+        // this.ctx.restore();
+        this.ctx.translate(-dx, -dy);
 
         this.ctx.beginPath();
         this.ctx.moveTo(dx - this.size, dy - this.size);
         this.ctx.lineTo(dx + this.size, dy);
         this.ctx.lineTo(dx - this.size, dy + this.size);
+        this.ctx.fill();
         this.ctx.closePath();
 
-        this.ctx.fill();
+        this.ctx.translate(dx, dy);
+        this.ctx.rotate(-this.angle * Math.PI / 180);
+        this.ctx.translate(-dx, -dy);
 
         
     }

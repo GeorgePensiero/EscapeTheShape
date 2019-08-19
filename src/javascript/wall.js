@@ -11,6 +11,7 @@ export default class Wall {
         this.angle = Math.random() * 360;
         this.rotation = rotation;
         this.gap = new Gap(this.ctx, this.x, this.y, this.radius, this.angle, this.rotation, this.time);
+        this.gapSize = ((Math.random() * 1.5) + 1);
     }
 
     draw(){
@@ -18,10 +19,11 @@ export default class Wall {
         let diff = newTime - this.time;
         this.time = newTime;
         this.ctx.beginPath();
-        this.ctx.arc(this.x,  this.y, this.radius, 0 + this.angle, 2 * Math.PI - 1.2 + this.angle, false);
         this.ctx.strokeStyle = this.color;
         this.ctx.lineWidth = 8;
+        this.ctx.arc(this.x,  this.y, this.radius, 0 + this.angle, 2 * Math.PI - 1.2 + this.angle, false);
         this.ctx.stroke();
+        this.ctx.closePath();
         this.angle += diff * this.rotation;
         this.gap.angle += diff * this.rotation;
         this.angle %= 2 * Math.PI;
@@ -31,8 +33,9 @@ export default class Wall {
     update(){
         if(this.radius > 30) {
             this.radius -= 3;
+            this.gap.radius -= 3;
         } 
+        this.gap.draw();
         this.draw();
-        this.gap.update();
     }
 }
