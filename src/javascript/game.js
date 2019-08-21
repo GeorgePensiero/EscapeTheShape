@@ -40,10 +40,12 @@ export default class Game {
             wall.update();
             // wall.gap.update();
         })
-    
+        this.player.draw(5);
+        if(this.walls.length){
+            this.checkCollision(this.player, this.walls[0].gap);
+        }
         // this.ctx.stroke();
         // this.ctx.closePath();
-        this.player.draw(5);
     }
 
     update(){
@@ -53,4 +55,18 @@ export default class Game {
         if (this.walls.length > 0 && this.walls[0].radius < 30) { this.walls.shift()}
         this.draw();
         }
+
+    checkCollision(player, gap){
+        let collision = false;
+        let gapPos = gap.getPosition();
+        let playerPos = player.getPosition();
+
+        if(gap.radius === 55){
+            if(playerPos > gapPos[start] && playerPos < gapPos[end]) collision = true;
+        }
+        if(collision === true){
+            this.ctx.strokeStyle = 'blue'
+            this.ctx.strokeRect(DIM_X / 2 - 25, DIM_Y / 2 - 25, 50, 50)
+        }
+    }
 }

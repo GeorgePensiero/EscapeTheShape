@@ -69,8 +69,6 @@ export default class Player {
         this.ctx.translate(dx, dy);
         this.ctx.rotate(-this.angle * Math.PI / 180);
         this.ctx.translate(-dx, -dy);
-
-        
     }
     handlePress(e) {
         e.preventDefault();
@@ -92,6 +90,10 @@ export default class Player {
 
     handleKeyUp(e){
         this.direction = 0;
+    }
+
+    getPosition(){
+        return this.angle;
     }
 }
 
