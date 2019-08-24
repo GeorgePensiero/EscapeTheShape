@@ -11,7 +11,7 @@ export default class Game {
         this.player = new Player(this.canvas, this.ctx)
         this.walls = [];
         this.timer = null;
-        
+        this.score = 0;
     }
 
 
@@ -48,9 +48,10 @@ export default class Game {
             //TODO: we check for collision when the wall is literally ontop of the player
             // maybe find a sweet spot with this.player.radius + 1 or something cause the triangle has
             // a size to it.
-            const isWallOnPlayer = this.walls[0].radius <= this.player.radius;
+            const isWallOnPlayer = this.walls[0].radius <= this.player.radius + this.player.size;
             if (isWallOnPlayer){
                 this.checkCollision(this.player, this.walls[0].gap);
+                // console.log(this.walls[0].angle);
             }
         }
         // this.ctx.stroke();
@@ -63,10 +64,14 @@ export default class Game {
         }
         if (this.walls.length > 0 && this.walls[0].radius < 30) { this.walls.shift()}
         this.draw();
+        
         }
 
+    updateScore(){
+        this.score += 1;
+    }
+
     checkCollision(player, gap){
-        debugger;
         let collision = false;
         let gapPos = gap.getPosition();
         let playerAngle = player.getPosition() * Math.PI / 180;
@@ -93,8 +98,10 @@ export default class Game {
             }
 
         if(collision === true){
-            this.ctx.strokeStyle = 'blue'
-            this.ctx.strokeRect(DIM_X / 2 - 25, DIM_Y / 2 - 25, 50, 50)
+            // this.ctx.strokeStyle = 'blue'
+            // this.ctx.strokeRect(DIM_X / 2 - 25, DIM_Y / 2 - 25, 50, 50)
+            this.updateScore();
+            console.log(this.score);
         }
     }
 }

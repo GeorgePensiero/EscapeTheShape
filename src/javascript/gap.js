@@ -13,7 +13,7 @@ export default class Gap {
 
     draw(){
         this.ctx.beginPath();
-        this.ctx.strokeStyle = "#FF0000"
+        this.ctx.strokeStyle = "#48639c"
         this.ctx.lineWidth = 8;
         this.ctx.arc(this.x, this.y, this.radius, this.angle, this.partialCircleAngle + this.angle, true);
         this.ctx.stroke();

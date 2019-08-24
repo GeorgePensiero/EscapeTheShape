@@ -32,7 +32,7 @@ export default class Wall {
         this.gap.angle %= 2 * Math.PI;
 
         if (this.angle < 0) {
-            this.angle = 2 * Math.PI - this.angle;
+            this.angle = 2 * Math.PI;
         }
 
         if (this.angle > 2 * Math.PI) {
@@ -40,7 +40,7 @@ export default class Wall {
         }
 
         if (this.gap.angle < 0) {
-            this.gap.angle = 2 * Math.PI - this.gap.angle;
+            this.gap.angle = 2 * Math.PI;
         }
 
         if (this.gap.angle > 2 * Math.PI) {
