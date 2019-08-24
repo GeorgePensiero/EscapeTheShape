@@ -33,9 +33,12 @@ export default class Game {
         this.ctx.clearRect(0, 0, DIM_X, DIM_Y);
         const centerX = DIM_X / 2;
         const centerY = DIM_Y / 2;
+        this.ctx.beginPath();
         this.ctx.lineWidth = 1;
         this.ctx.strokeStyle = "black"
-        this.ctx.strokeRect(centerX - 25, centerY - 25, 50, 50);
+        this.ctx.arc(centerX, centerY, 30, 0, 2 * Math.PI, false);
+        this.ctx.stroke();
+        this.ctx.closePath();
         this.walls.forEach(wall => {
             wall.update();
             // wall.gap.update();
@@ -48,7 +51,7 @@ export default class Game {
             //TODO: we check for collision when the wall is literally ontop of the player
             // maybe find a sweet spot with this.player.radius + 1 or something cause the triangle has
             // a size to it.
-            const isWallOnPlayer = this.walls[0].radius <= this.player.radius + this.player.size;
+            const isWallOnPlayer = this.walls[0].radius <= this.player.radius + this.player.size && this.walls[0].radius >= this.player.radius + this.player.size - 1;
             if (isWallOnPlayer){
                 this.checkCollision(this.player, this.walls[0].gap);
                 // console.log(this.walls[0].angle);

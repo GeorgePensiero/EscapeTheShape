@@ -69,6 +69,8 @@ export default class Player {
         this.ctx.translate(dx, dy);
         this.ctx.rotate(-this.angle * Math.PI / 180);
         this.ctx.translate(-dx, -dy);
+
+        
         // console.log("dx" + dx);
         // console.log("dy" + dy);
     }
