@@ -8,7 +8,7 @@ export default class Wall {
         this.radius = radius;
         this.color = color;
         this.time = new Date().getTime();
-        this.angle = Math.random() * 360;
+        this.angle = Math.random() * (2 * Math.PI);
         this.rotation = rotation;
         this.endAngle = 2 * Math.PI - 1.2;
         this.gap = new Gap(this.ctx, this.x, this.y, this.radius, this.angle, this.rotation, this.time);
@@ -24,10 +24,28 @@ export default class Wall {
         this.ctx.arc(this.x, this.y, this.radius, this.angle, this.endAngle + this.angle, false);
         this.ctx.stroke();
         this.ctx.closePath();
+
         this.angle += diff * this.rotation;
-        this.gap.angle += diff * this.rotation;
         this.angle %= 2 * Math.PI;
+
+        this.gap.angle += diff * this.rotation;
         this.gap.angle %= 2 * Math.PI;
+
+        if (this.angle < 0) {
+            this.angle = 2 * Math.PI - this.angle;
+        }
+
+        if (this.angle > 2 * Math.PI) {
+            this.angle %= 2 * Math.PI;
+        }
+
+        if (this.gap.angle < 0) {
+            this.gap.angle = 2 * Math.PI - this.gap.angle;
+        }
+
+        if (this.gap.angle > 2 * Math.PI) {
+            this.gap.angle %= 2 * Math.PI;
+        }
     }
 
     update(){

@@ -8,14 +8,14 @@ export default class Gap {
         this.radius = radius; 
         this.rotation = rotation;
         this.angle = angle;
-        this.endAngle = 2 * Math.PI - 1.2;
+        this.partialCircleAngle = 2 * Math.PI - 1.2;
     }
 
     draw(){
         this.ctx.beginPath();
         this.ctx.strokeStyle = "#FF0000"
         this.ctx.lineWidth = 8;
-        this.ctx.arc(this.x, this.y, this.radius, this.angle, this.endAngle + this.angle, true);
+        this.ctx.arc(this.x, this.y, this.radius, this.angle, this.partialCircleAngle + this.angle, true);
         this.ctx.stroke();
         this.ctx.closePath();
     }
@@ -30,7 +30,7 @@ export default class Gap {
     getPosition(){
        const position = {
            start: this.angle,
-           end: this.endAngle + this.angle,
+           end: this.partialCircleAngle + this.angle,
        }
        return position;
     }

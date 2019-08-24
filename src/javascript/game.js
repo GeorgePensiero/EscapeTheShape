@@ -41,8 +41,17 @@ export default class Game {
             // wall.gap.update();
         })
         this.player.draw(5);
-        if(this.walls.length){
-            this.checkCollision(this.player, this.walls[0].gap);
+
+        const doWallsExist = this.walls.length > 0;
+        if(doWallsExist){
+
+            //TODO: we check for collision when the wall is literally ontop of the player
+            // maybe find a sweet spot with this.player.radius + 1 or something cause the triangle has
+            // a size to it.
+            const isWallOnPlayer = this.walls[0].radius <= this.player.radius;
+            if (isWallOnPlayer){
+                this.checkCollision(this.player, this.walls[0].gap);
+            }
         }
         // this.ctx.stroke();
         // this.ctx.closePath();
@@ -57,13 +66,32 @@ export default class Game {
         }
 
     checkCollision(player, gap){
+        debugger;
         let collision = false;
         let gapPos = gap.getPosition();
-        let playerPos = player.getPosition();
-
-        if(gap.radius === 55){
-            if(playerPos > gapPos[start] && playerPos < gapPos[end]) collision = true;
+        let playerAngle = player.getPosition() * Math.PI / 180;
+        let endAngle = gap.angle - (2 * Math.PI - gap.partialCircleAngle);
+        if (endAngle < 0) {
+            endAngle += 2*Math.PI;
         }
+
+        // if(playerPos > gapPos[start] && playerPos < gapPos[end]) collision = true;
+
+        // the case when the gap straddles the horizontal
+
+        if (gap.angle < endAngle){
+            if ((playerAngle  > endAngle 
+                && playerAngle < 2 * Math.PI) 
+                || playerAngle < gap.angle && playerAngle > 0){
+                collision = true;
+            }
+        }
+
+        if (playerAngle < gap.angle &&
+            playerAngle > endAngle) {
+                collision = true;
+            }
+
         if(collision === true){
             this.ctx.strokeStyle = 'blue'
             this.ctx.strokeRect(DIM_X / 2 - 25, DIM_Y / 2 - 25, 50, 50)
