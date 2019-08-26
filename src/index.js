@@ -12,6 +12,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const gameView = new GameView(canvas, ctx);
     document.addEventListener('keydown', e => gameView.game.player.handlePress(e));
+    document.addEventListener('keydown', e => gameView.game.gameStart(e));
     document.addEventListener('keyup', e => gameView.game.player.handleKeyUp(e));
     gameView.animate();
 });

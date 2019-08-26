@@ -60,6 +60,7 @@ export default class Player {
         this.ctx.translate(-dx, -dy);
 
         this.ctx.beginPath();
+        this.ctx.fillStyle = "black";
         this.ctx.moveTo(dx - this.size, dy - this.size);
         this.ctx.lineTo(dx + this.size, dy);
         this.ctx.lineTo(dx - this.size, dy + this.size);
