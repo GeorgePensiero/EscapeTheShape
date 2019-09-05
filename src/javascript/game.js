@@ -68,12 +68,12 @@ export default class Game {
         this.ctx.clearRect(0, 0, DIM_X, DIM_Y);
         const centerX = DIM_X / 2;
         const centerY = DIM_Y / 2;
-        this.ctx.beginPath();
-        this.ctx.lineWidth = 1;
-        this.ctx.strokeStyle = "black"
-        this.ctx.arc(centerX, centerY, 30, 0, 2 * Math.PI, false);
-        this.ctx.stroke();
-        this.ctx.closePath();
+        // this.ctx.beginPath();
+        // this.ctx.lineWidth = 1;
+        // this.ctx.strokeStyle = "black"
+        // // this.ctx.arc(centerX, centerY, 30, 0, 2 * Math.PI, false);
+        // this.ctx.stroke();
+        // this.ctx.closePath();
         this.walls.forEach(wall => {
             wall.update();
             // wall.gap.update();
