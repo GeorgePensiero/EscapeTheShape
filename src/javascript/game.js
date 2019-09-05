@@ -14,6 +14,13 @@ export default class Game {
         this.score = 0;
         this.inGame = false;
         this.dead = false;
+        this.bg = "#48639c";
+    }
+
+    changeBG() {
+        const randomColor = Math.floor(Math.random() * 16777215).toString(16);
+        const canvas = document.getElementById("myCanvas");
+        this.bg = canvas.style.backgroundColor = "#" + randomColor;
     }
 
     init(){
@@ -113,6 +120,8 @@ export default class Game {
     }
 
     gameOver(){
+        const canvas = document.getElementById("myCanvas");
+        canvas.style.backgroundColor = ("#48639c");
         this.walls = [];
         let y = this.canvas.height / 2;
         let color = "#FF0000";
@@ -122,13 +131,13 @@ export default class Game {
         this.ctx.clearRect(0, 0, DIM_X, DIM_Y);
         this.ctx.fillStyle = color;
         this.ctx.font = "48px monospace";
-        this.centerText(title, y + 30);
+        this.centerText(title, y + 60);
         
         this.ctx.font = "24px monospace";
         this.centerText(score, y);
         this.ctx.fillStyle = color;
         this.ctx.font = "24px monospace";
-        this.centerText(enter, y + 60);
+        this.centerText(enter, y + 100);
 
         document.addEventListener('keydown', e => this.gameStart(e));
     }
@@ -163,6 +172,7 @@ export default class Game {
             // this.ctx.strokeStyle = 'blue'
             // this.ctx.strokeRect(DIM_X / 2 - 25, DIM_Y / 2 - 25, 50, 50)
             this.updateScore();
+            this.changeBG();
         }
         return collision;
     }
@@ -191,6 +201,7 @@ export default class Game {
         e.preventDefault();
         if(e.which === 13 || e.keyCode === 13) {
             this.inGame = true;
+            this.bg = "#48639c"
             this.dead = false;
             this.score = 0;
         }

@@ -7,6 +7,8 @@ export default class GameView {
         this.game = new Game(this.canvas, this.ctx);
     }
 
+    
+
 
     animate() {
         this.game.init();

@@ -17,6 +17,7 @@ export default class Wall {
     draw(){
         const newTime = new Date().getTime();
         let diff = newTime - this.time;
+       
         this.time = newTime;
         this.ctx.beginPath();
         this.ctx.strokeStyle = this.color;

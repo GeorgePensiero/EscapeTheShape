@@ -1,7 +1,7 @@
 
 
 export default class Gap {
-    constructor(ctx, x , y, radius, angle, rotation){
+    constructor(ctx, x , y, radius, angle, rotation, time){
         this.ctx = ctx;
         this.x = x;
         this.y = y;
@@ -13,11 +13,12 @@ export default class Gap {
 
     draw(){
         this.ctx.beginPath();
-        this.ctx.strokeStyle = "#48639c"
+        this.ctx.globalAlpha = 0.0;
         this.ctx.lineWidth = 8;
         this.ctx.arc(this.x, this.y, this.radius, this.angle, this.partialCircleAngle + this.angle, true);
         this.ctx.stroke();
         this.ctx.closePath();
+        this.ctx.globalAlpha = 1.0;
     }
 
     update() {
