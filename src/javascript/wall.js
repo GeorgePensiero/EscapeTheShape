@@ -54,16 +54,13 @@ export default class Wall {
             this.radius -= 3;
             this.gap.radius -= 3;
         } 
-        if(this.radius === 290){
-            this.reverse();
-        }
         this.gap.draw();
         this.draw();
     }
 
     reverse(){
-        
-        this.rotation *= -3;
-        
+        if(this.radius === 290){
+            this.rotation *= -1.2;
+        }
     }
 }

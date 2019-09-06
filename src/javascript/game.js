@@ -16,6 +16,7 @@ export default class Game {
         this.dead = false;
         this.bg = "#48639c";
         this.highScore = 0;
+        this.speed = [-.001, .001];
         this.themeSong = new Sound("gametheme.mp3");
     }
 
@@ -38,22 +39,41 @@ export default class Game {
 
 
     addWall(){
-       const slowRotations = [-.001, .001];
        const medRotations = [-.002, .002];
        const fastRotations = [-.003, .003];
-       if (this.score < 10){
-        const wall = new Wall(this.ctx, this.canvas.width / 2, this.canvas.height / 2, this.canvas.width / 2, "#388697", slowRotations[Math.floor(Math.random() * slowRotations.length)])
+    //    if (this.score < 10){
+        const wall = new Wall(this.ctx, this.canvas.width / 2, this.canvas.height / 2, this.canvas.width / 2, "#388697", this.speed[Math.floor(Math.random() * this.speed.length)])
         this.walls.push(wall);
         this.timer = null;
-       } else if (this.score < 20){
-            const wall = new Wall(this.ctx, this.canvas.width / 2, this.canvas.height / 2, this.canvas.width / 2, "#388697", medRotations[Math.floor(Math.random() * medRotations.length)])
-            this.walls.push(wall);
-            this.timer = null;
-       } else {
-            const wall = new Wall(this.ctx, this.canvas.width / 2, this.canvas.height / 2, this.canvas.width / 2, "#388697", fastRotations[Math.floor(Math.random() * fastRotations.length)])
-            this.walls.push(wall);
-            this.timer = null;
-       }
+    //    } else if (this.score < 20){
+    //         const wall = new Wall(this.ctx, this.canvas.width / 2, this.canvas.height / 2, this.canvas.width / 2, "#388697", medRotations[Math.floor(Math.random() * medRotations.length)])
+    //         this.walls.push(wall);
+    //         this.timer = null;
+    //    } else {
+    //         const wall = new Wall(this.ctx, this.canvas.width / 2, this.canvas.height / 2, this.canvas.width / 2, "#388697", fastRotations[Math.floor(Math.random() * fastRotations.length)])
+    //         this.walls.push(wall);
+    //         this.timer = null;
+    //    }
+    }
+
+    increaseDifficulty(){
+        if(this.score === 10 && this.walls[0].radius === 47){
+            this.increaseSpeed(this.walls);
+            
+        } else if(this.score > 30){
+            // this.increaseSpeed(this.walls);
+            this.walls.forEach(wall => {
+                wall.reverse();
+            })
+            
+        } 
+            else if(this.score > 40){
+            }
+        }
+    
+
+    increaseSpeed(walls){
+        this.speed = this.speed.map(speed => speed * 1.2);
     }
 
     allWalls(){
@@ -103,6 +123,7 @@ export default class Game {
                 // console.log(this.walls[0].angle);
             }
         }
+        this.increaseDifficulty();
         this.showScore();
         if(this.walls.length) {console.log(this.walls[0].radius) };
         // this.ctx.stroke();
