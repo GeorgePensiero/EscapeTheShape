@@ -21,7 +21,7 @@ export default class Wall {
         this.time = newTime;
         this.ctx.beginPath();
         this.ctx.strokeStyle = this.color;
-        this.ctx.lineWidth = 8;
+        this.ctx.lineWidth = 12;
         this.ctx.arc(this.x, this.y, this.radius, this.angle, this.endAngle + this.angle, false);
         this.ctx.stroke();
         this.ctx.closePath();
@@ -54,7 +54,16 @@ export default class Wall {
             this.radius -= 3;
             this.gap.radius -= 3;
         } 
+        if(this.radius === 290){
+            this.reverse();
+        }
         this.gap.draw();
         this.draw();
+    }
+
+    reverse(){
+        
+        this.rotation *= -3;
+        
     }
 }

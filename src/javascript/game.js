@@ -104,6 +104,7 @@ export default class Game {
             }
         }
         this.showScore();
+        if(this.walls.length) {console.log(this.walls[0].radius) };
         // this.ctx.stroke();
         // this.ctx.closePath();
     }
