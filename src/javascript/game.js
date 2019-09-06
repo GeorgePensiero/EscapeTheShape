@@ -1,6 +1,6 @@
 import Player from "./player";
 import Wall from "./wall";
-
+import Sound from './sound';
 const DIM_X = 1000;
 const DIM_Y = 600;
 const COLOR_SCHEME = ["#CC29336", "EBBAB9", "#388697", "#BFFFE1"]
@@ -15,6 +15,8 @@ export default class Game {
         this.inGame = false;
         this.dead = false;
         this.bg = "#48639c";
+        this.highScore = 0;
+        this.themeSong = new Sound("gametheme.mp3");
     }
 
     changeBG() {
@@ -75,12 +77,12 @@ export default class Game {
         this.ctx.clearRect(0, 0, DIM_X, DIM_Y);
         const centerX = DIM_X / 2;
         const centerY = DIM_Y / 2;
-        // this.ctx.beginPath();
-        // this.ctx.lineWidth = 1;
-        // this.ctx.strokeStyle = "black"
-        // // this.ctx.arc(centerX, centerY, 30, 0, 2 * Math.PI, false);
-        // this.ctx.stroke();
-        // this.ctx.closePath();
+        this.ctx.beginPath();
+        this.ctx.lineWidth = 1;
+        this.ctx.strokeStyle = "black";
+        this.ctx.arc(centerX, centerY, 30, 0, 2 * Math.PI, false);
+        this.ctx.stroke();
+        this.ctx.closePath();
         this.walls.forEach(wall => {
             wall.update();
             // wall.gap.update();
@@ -120,6 +122,10 @@ export default class Game {
     }
 
     gameOver(){
+        if(this.score > this.highScore) {
+            this.highScore = this.score;
+        }
+        this.themeSong.stop();
         const canvas = document.getElementById("myCanvas");
         canvas.style.backgroundColor = ("#48639c");
         this.walls = [];
@@ -128,17 +134,18 @@ export default class Game {
         let title = "Game Over";
         let enter = "Try again";
         let score = `Score: ${this.score}`;
+        let highScore = `High Score: ${this.highScore}`;
         this.ctx.clearRect(0, 0, DIM_X, DIM_Y);
         this.ctx.fillStyle = color;
         this.ctx.font = "48px monospace";
         this.centerText(title, y + 60);
         
         this.ctx.font = "24px monospace";
+        this.centerText(highScore, y + 20);
         this.centerText(score, y);
         this.ctx.fillStyle = color;
         this.ctx.font = "24px monospace";
         this.centerText(enter, y + 100);
-
         document.addEventListener('keydown', e => this.gameStart(e));
     }
 
@@ -200,6 +207,7 @@ export default class Game {
     gameStart(e){
         e.preventDefault();
         if(e.which === 13 || e.keyCode === 13) {
+            this.themeSong.play();
             this.inGame = true;
             this.bg = "#48639c"
             this.dead = false;
