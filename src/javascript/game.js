@@ -57,18 +57,36 @@ export default class Game {
     }
 
     increaseDifficulty(){
-        if(this.score === 10 && this.walls[0].radius === 47){
+        let radius;
+        if(this.walls.length) { radius = this.walls[0].radius}
+        if(this.score === 10 && radius === 47){
             this.increaseSpeed(this.walls);
             
-        } else if(this.score > 30){
-            // this.increaseSpeed(this.walls);
+        } else if(this.score === 20 && radius === 47){
+            this.increaseSpeed(this.walls);
+        } else if(this.score === 30 && radius === 47){
+            this.increaseSpeed(this.walls);
+        }
+        else if(this.score === 40 && radius === 47){
+            this.increaseSpeed(this.walls);
+        }
+        else if (this.score === 50 && radius === 47) {
+            this.increaseSpeed(this.walls);
+        }
+        else if (this.score === 60 && radius === 47) {
+            this.increaseSpeed(this.walls);
+        }
+        else if (this.score === 70 && radius === 47) {
+            this.increaseSpeed(this.walls);
+        }
+        else if (this.score === 80 && radius === 47){
+            this.speed = this.speed.map(speed => speed * 10);
+        }
+        if(this.score > 30){
             this.walls.forEach(wall => {
                 wall.reverse();
-            })
-            
-        } 
-            else if(this.score > 40){
-            }
+            });
+        }
         }
     
 
@@ -123,19 +141,19 @@ export default class Game {
                 // console.log(this.walls[0].angle);
             }
         }
-        this.increaseDifficulty();
         this.showScore();
         if(this.walls.length) {console.log(this.walls[0].radius) };
         // this.ctx.stroke();
         // this.ctx.closePath();
     }
-
+    
     run(){
         const wallSpace = 1000;
         if(this.walls.length < 8 && this.timer === null){
             this.timer = setTimeout(() => this.addWall(), wallSpace);
         }
         if (this.walls.length > 0 && this.walls[0].radius < 30) { this.walls.shift()}
+        this.increaseDifficulty();
         this.draw();
         }
 
@@ -151,6 +169,7 @@ export default class Game {
         const canvas = document.getElementById("myCanvas");
         canvas.style.backgroundColor = ("#48639c");
         this.walls = [];
+        this.speed = [-.001, .001];
         let y = this.canvas.height / 2;
         let color = "#FF0000";
         let title = "Game Over";
