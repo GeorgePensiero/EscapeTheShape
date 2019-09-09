@@ -6,5 +6,8 @@ body{
     align-items: center;
     justify-content: center;
     height: -webkit-fill-available;
-    background-image: url(/Users/George/Downloads/EscapeTheShape-master/src/shape_background_img.png);
+    background-image: url(https://cdn5.vectorstock.com/i/1000x1000/21/49/background-for-text-geometric-shapes-vector-19362149.jpg);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
 }
