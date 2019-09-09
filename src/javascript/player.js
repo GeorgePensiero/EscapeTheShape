@@ -12,37 +12,7 @@ export default class Player {
     }
 
     draw() {
-        // switch (this.playerPos) {
-        //     case "left":
-        //         this.ctx.beginPath();
-        //         this.ctx.moveTo(this.canvas.width / 2 - 30, this.canvas.height / 2 + 5);
-        //         this.ctx.lineTo(this.canvas.width / 2 - 40, this.canvas.height / 2);
-        //         this.ctx.lineTo(this.canvas.width / 2 - 30, this.canvas.height / 2 - 5);
-        //         this.ctx.fill();
-        //         break;
-        //     case "up":
-        //         this.ctx.beginPath();
-        //         this.ctx.moveTo(this.canvas.width / 2 - 5, this.canvas.height / 2 - 30);
-        //         this.ctx.lineTo(this.canvas.width / 2, this.canvas.height / 2 - 40);
-        //         this.ctx.lineTo(this.canvas.width / 2 + 5, this.canvas.height / 2 - 30);
-        //         this.ctx.fill();
-        //         break;
-        //     case "right":
-        //         this.ctx.beginPath();
-        //         this.ctx.moveTo(this.canvas.width / 2 + 30, this.canvas.height / 2 + 5);
-        //         this.ctx.lineTo(this.canvas.width / 2 + 40, this.canvas.height / 2);
-        //         this.ctx.lineTo(this.canvas.width / 2 + 30, this.canvas.height / 2 - 5);
-        //         this.ctx.fill();
-        //         break;
-        //     case "down":
-        //         this.ctx.beginPath();
-        //         this.ctx.moveTo(this.canvas.width / 2 - 5, this.canvas.height / 2 + 30);
-        //         this.ctx.lineTo(this.canvas.width / 2, this.canvas.height / 2 + 40);
-        //         this.ctx.lineTo(this.canvas.width / 2 + 5, this.canvas.height / 2 + 30);
-        //         this.ctx.fill();
-        //         break;
-        //     default:
-        //         return null;
+       
         const dx = (this.canvas.width / 2) + ((this.radius) * Math.cos(this.angle * Math.PI / 180));
         const dy = (this.canvas.height / 2) + ((this.radius) * Math.sin(this.angle * Math.PI / 180));
         this.angle = this.angle + (this.direction * this.speed);
@@ -60,7 +30,7 @@ export default class Player {
         this.ctx.translate(-dx, -dy);
 
         this.ctx.beginPath();
-        this.ctx.fillStyle = "black";
+        this.ctx.fillStyle = "#FFD700";
         this.ctx.moveTo(dx - this.size, dy - this.size);
         this.ctx.lineTo(dx + this.size, dy);
         this.ctx.lineTo(dx - this.size, dy + this.size);

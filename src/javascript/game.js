@@ -39,21 +39,10 @@ export default class Game {
 
 
     addWall(){
-       const medRotations = [-.002, .002];
-       const fastRotations = [-.003, .003];
-    //    if (this.score < 10){
         const wall = new Wall(this.ctx, this.canvas.width / 2, this.canvas.height / 2, this.canvas.width / 2, "#388697", this.speed[Math.floor(Math.random() * this.speed.length)])
         this.walls.push(wall);
         this.timer = null;
-    //    } else if (this.score < 20){
-    //         const wall = new Wall(this.ctx, this.canvas.width / 2, this.canvas.height / 2, this.canvas.width / 2, "#388697", medRotations[Math.floor(Math.random() * medRotations.length)])
-    //         this.walls.push(wall);
-    //         this.timer = null;
-    //    } else {
-    //         const wall = new Wall(this.ctx, this.canvas.width / 2, this.canvas.height / 2, this.canvas.width / 2, "#388697", fastRotations[Math.floor(Math.random() * fastRotations.length)])
-    //         this.walls.push(wall);
-    //         this.timer = null;
-    //    }
+   
     }
 
     increaseDifficulty(){
@@ -133,7 +122,7 @@ export default class Game {
             //TODO: we check for collision when the wall is literally ontop of the player
             // maybe find a sweet spot with this.player.radius + 1 or something cause the triangle has
             // a size to it.
-            const isWallOnPlayer = this.walls[0].radius <= this.player.radius + this.player.size && this.walls[0].radius >= this.player.radius + this.player.size - 1;
+            const isWallOnPlayer = this.walls[0].radius <= this.player.radius + this.player.size + 6 && this.walls[0].radius >= this.player.radius;
             if (isWallOnPlayer){
                 if(!this.checkCollision(this.player, this.walls[0].gap)){
                     this.dead = true;
@@ -155,10 +144,17 @@ export default class Game {
         if (this.walls.length > 0 && this.walls[0].radius < 30) { this.walls.shift()}
         this.increaseDifficulty();
         this.draw();
+        this.updateScore();
         }
 
     updateScore(){
-        this.score += 1;
+        if(this.walls.length){
+            if (this.walls[0].radius === 32) { 
+                this.score += 1;
+                this.changeBG();
+            }
+        }
+        
     }
 
     gameOver(){
@@ -176,6 +172,9 @@ export default class Game {
         let enter = "Try again";
         let score = `Score: ${this.score}`;
         let highScore = `High Score: ${this.highScore}`;
+        // let gameOver = document.createElement("div");
+        // gameOver.appendChild(document.createTextNode("Game Over"));
+        // document.body.appendChild(gameOver);
         this.ctx.clearRect(0, 0, DIM_X, DIM_Y);
         this.ctx.fillStyle = color;
         this.ctx.font = "48px monospace";
@@ -194,6 +193,7 @@ export default class Game {
         let collision = false;
         let gapPos = gap.getPosition();
         let playerAngle = player.getPosition() * Math.PI / 180;
+        let playerLeft = (this.canvas.height / 2) + ((this.radius) * Math.sin(this.angle * Math.PI / 180));
         let endAngle = gap.angle - (2 * Math.PI - gap.partialCircleAngle);
         if (endAngle < 0) {
             endAngle += 2*Math.PI;
@@ -219,8 +219,6 @@ export default class Game {
         if(collision === true){
             // this.ctx.strokeStyle = 'blue'
             // this.ctx.strokeRect(DIM_X / 2 - 25, DIM_Y / 2 - 25, 50, 50)
-            this.updateScore();
-            this.changeBG();
         }
         return collision;
     }
