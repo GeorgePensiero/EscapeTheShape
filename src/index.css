@@ -3,6 +3,7 @@
 
 body{
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     height: -webkit-fill-available;
@@ -11,3 +12,20 @@ body{
     -moz-background-size: cover;
     background-size: cover;
 }
+
+.author-info{
+    display: flex;
+}
+
+.author-info a{
+    text-decoration: none;
+    color: black;
+    margin-right: 10px;
+    margin-bottom: 20px;
+    font-size: 24px;
+}
+
+.author-info a:hover{
+    color: #00c;
+}
+
