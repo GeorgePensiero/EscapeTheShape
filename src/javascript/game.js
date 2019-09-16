@@ -1,9 +1,15 @@
 import Player from "./player";
 import Wall from "./wall";
+import Circle from './circle';
 import Sound from './sound';
 const DIM_X = 1000;
 const DIM_Y = 600;
 const COLOR_SCHEME = ["#CC29336", "EBBAB9", "#388697", "#BFFFE1"]
+const colors = [
+    "#00bdff",
+    "#4d39ce",
+    "#088eff",
+];
 export default class Game {
     constructor(canvas, ctx) {
         this.ctx = ctx;
@@ -18,6 +24,12 @@ export default class Game {
         this.highScore = 0;
         this.speed = [-.001, .001];
         this.themeSong = new Sound("gametheme.mp3");
+        this.gameOverSong = new Sound("gameOver.mp3");
+        this.gOLoop = true;
+    }
+
+    randomColor(colors) {
+        return colors[Math.floor(Math.random() * colors.length)];
     }
 
     changeBG() {
@@ -42,7 +54,6 @@ export default class Game {
         const wall = new Wall(this.ctx, this.canvas.width / 2, this.canvas.height / 2, this.canvas.width / 2, "#388697", this.speed[Math.floor(Math.random() * this.speed.length)])
         this.walls.push(wall);
         this.timer = null;
-   
     }
 
     increaseDifficulty(){
@@ -115,7 +126,7 @@ export default class Game {
             // wall.gap.update();
         })
         this.player.draw(5);
-
+    
         const doWallsExist = this.walls.length > 0;
         if(doWallsExist){
 
@@ -162,6 +173,10 @@ export default class Game {
             this.highScore = this.score;
         }
         this.themeSong.stop();
+        if(this.gOLoop){
+            this.gameOverSong.play();
+            this.gOLoop = false;
+        }
         const canvas = document.getElementById("myCanvas");
         canvas.style.backgroundColor = ("#48639c");
         this.walls = [];
@@ -245,6 +260,7 @@ export default class Game {
 
     gameStart(e){
         e.preventDefault();
+        this.gOLoop = true;
         if(e.which === 13 || e.keyCode === 13) {
             this.themeSong.play();
             this.inGame = true;
