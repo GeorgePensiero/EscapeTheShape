@@ -1,4 +1,5 @@
 #myCanvas{
+    border-radius: 4px;
 }
 
 body{
@@ -27,5 +28,11 @@ body{
 
 .author-info a:hover{
     color: #00c;
+}
+
+.instructions p{
+    margin: 5px 0px;
+    font-size: 16px;
+    font-family: sans-serif;
 }
 

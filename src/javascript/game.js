@@ -4,7 +4,7 @@ import Circle from './circle';
 import Sound from './sound';
 const DIM_X = 1000;
 const DIM_Y = 600;
-const COLOR_SCHEME = ["#CC29336", "EBBAB9", "#388697", "#BFFFE1"]
+const COLOR_SCHEME = ["#ffce00", "c9ff00", "#49ff00", "#00ffec", "#00d2ff"]
 const colors = [
     "#00bdff",
     "#4d39ce",
@@ -33,9 +33,9 @@ export default class Game {
     }
 
     changeBG() {
-        const randomColor = Math.floor(Math.random() * 16777215).toString(16);
+        const randomColor = COLOR_SCHEME[Math.floor(Math.random() * COLOR_SCHEME.length)];
         const canvas = document.getElementById("myCanvas");
-        this.bg = canvas.style.backgroundColor = "#" + randomColor;
+        this.bg = canvas.style.backgroundColor = randomColor;
     }
 
     init(){
@@ -51,7 +51,7 @@ export default class Game {
 
 
     addWall(){
-        const wall = new Wall(this.ctx, this.canvas.width / 2, this.canvas.height / 2, this.canvas.width / 2, "#388697", this.speed[Math.floor(Math.random() * this.speed.length)])
+        const wall = new Wall(this.ctx, this.canvas.width / 2, this.canvas.height / 2, this.canvas.width / 2, "#223142", this.speed[Math.floor(Math.random() * this.speed.length)])
         this.walls.push(wall);
         this.timer = null;
     }
@@ -107,6 +107,7 @@ export default class Game {
 
     centerText(text, y){
         const measurement = this.ctx.measureText(text);
+        const measurementwidth = (this.canvas.width - measurement.width) / 2;
         const x = (this.canvas.width - measurement.width) / 2;
         this.ctx.fillText(text, x, y);
     }
@@ -187,19 +188,16 @@ export default class Game {
         let enter = "Try again";
         let score = `Score: ${this.score}`;
         let highScore = `High Score: ${this.highScore}`;
-        // let gameOver = document.createElement("div");
-        // gameOver.appendChild(document.createTextNode("Game Over"));
-        // document.body.appendChild(gameOver);
         this.ctx.clearRect(0, 0, DIM_X, DIM_Y);
         this.ctx.fillStyle = color;
-        this.ctx.font = "48px monospace";
+        this.ctx.font = "48px unicorn";
         this.centerText(title, y + 60);
         
-        this.ctx.font = "24px monospace";
-        this.centerText(highScore, y + 20);
-        this.centerText(score, y);
+        this.ctx.font = "48px unicorn";
+        this.centerText(highScore, y - 100);
+        this.centerText(score, y - 50);
         this.ctx.fillStyle = color;
-        this.ctx.font = "24px monospace";
+        this.ctx.font = "24px unicorn";
         this.centerText(enter, y + 100);
         document.addEventListener('keydown', e => this.gameStart(e));
     }
@@ -243,17 +241,17 @@ export default class Game {
         let color = "#CC29336";
         let title = "Escape the Shape";
         let enter = "Press Enter";
-        // let enterLength = this.ctx.measureText(enter);
-        // let titleLength = this.ctx.measureText(title);
-        // let enterX = (this.canvas.width - enterLength.width) / 2;
-        // let x = (this.canvas.width - titleLength.width) / 2;
+        const gradient = this.ctx.createLinearGradient(0, 0, this.canvas.width, 0);
+        gradient.addColorStop("0", "#C873C8");
+        gradient.addColorStop("0.5", "#91D7A1");
+        gradient.addColorStop("1.0", "#DDD830");
         this.ctx.clearRect(0, 0, DIM_X, DIM_Y);
-        this.ctx.fillStyle = "white";
-        this.ctx.font = "48px monospace";
+        this.ctx.fillStyle = gradient;
+        this.ctx.font = "48px unicorn";
         this.centerText(title, y);
         
         this.ctx.fillStyle = color;
-        this.ctx.font = "24px monospace";
+        this.ctx.font = "24px unicorn";
         this.centerText(enter, y + 30);
         document.addEventListener('keydown', e => this.gameStart(e));
     }

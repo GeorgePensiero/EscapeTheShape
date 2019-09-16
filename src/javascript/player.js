@@ -30,7 +30,7 @@ export default class Player {
         this.ctx.translate(-dx, -dy);
 
         this.ctx.beginPath();
-        this.ctx.fillStyle = "#FFD700";
+        this.ctx.fillStyle = "black";
         this.ctx.moveTo(dx - this.size, dy - this.size);
         this.ctx.lineTo(dx + this.size, dy);
         this.ctx.lineTo(dx - this.size, dy + this.size);
@@ -41,19 +41,10 @@ export default class Player {
         this.ctx.rotate(-this.angle * Math.PI / 180);
         this.ctx.translate(-dx, -dy);
 
-        
-        // console.log("dx" + dx);
-        // console.log("dy" + dy);
     }
     handlePress(e) {
         e.preventDefault();
         switch (e.key) {
-            // case 'ArrowUp':
-            //     this.playerPos = "up";
-            //     break;
-            // case 'ArrowDown':
-            //     this.playerPos = "down";
-            //     break;
             case 'ArrowLeft':
                 this.direction = -1;
                 break;

@@ -18,6 +18,7 @@ export default class Wall {
         const newTime = new Date().getTime();
         let diff = newTime - this.time;
         this.time = newTime;
+        
         this.ctx.beginPath();
         this.ctx.strokeStyle = this.color;
         this.ctx.lineWidth = 12;
@@ -49,15 +50,14 @@ export default class Wall {
     }
 
     update(){
-        
         if(this.radius > 30) {
             this.radius -= 3;
             this.gap.radius -= 3;
         } 
         this.gap.draw();
         this.draw();
-        
     }
+
 
     reverse(){
         if(this.radius === 290){
