@@ -240,7 +240,6 @@ export default class Game {
         this.walls = [];
         this.speed = [-.001, .001];
         let y = this.canvas.height / 2;
-        let color = "#FF0000";
         let title = "Game Over";
         let enter = "Press enter to try again";
         let score = `Score: ${this.score}`;
