@@ -10,7 +10,7 @@ body{
     align-items: center;
     justify-content: center;
     height: -webkit-fill-available;
-    background-image: url(/Users/George/Downloads/EscapeTheShape-master/escapetheshap.jpg);
+    background-image: url("/Users/George/Downloads/EscapeTheShape-master/escapetheshap.jpg");
     -webkit-background-size: cover;
     -moz-background-size: cover;
     background-size: cover;
