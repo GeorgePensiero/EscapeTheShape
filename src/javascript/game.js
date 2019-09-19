@@ -100,7 +100,7 @@ export default class Game {
 
     showScore(){
         this.ctx.beginPath();
-        this.ctx.font = "20px Georgia";
+        this.ctx.font = "20px Orbitron";
         this.ctx.fillText("Score: " + this.score, this.canvas.width - 100, 30);
         this.ctx.closePath();
     }
@@ -143,7 +143,6 @@ export default class Game {
             }
         }
         this.showScore();
-        if(this.walls.length) {console.log(this.walls[0].radius) };
         // this.ctx.stroke();
         // this.ctx.closePath();
     }
@@ -190,14 +189,14 @@ export default class Game {
         let highScore = `High Score: ${this.highScore}`;
         this.ctx.clearRect(0, 0, DIM_X, DIM_Y);
         this.ctx.fillStyle = color;
-        this.ctx.font = "48px unicorn";
+        this.ctx.font = "48px Orbitron";
         this.centerText(title, y + 60);
         
-        this.ctx.font = "48px unicorn";
+        this.ctx.font = "48px Orbitron";
         this.centerText(highScore, y - 100);
         this.centerText(score, y - 50);
         this.ctx.fillStyle = color;
-        this.ctx.font = "24px unicorn";
+        this.ctx.font = "24px Orbitron";
         this.centerText(enter, y + 100);
         document.addEventListener('keydown', e => this.gameStart(e));
     }
@@ -247,11 +246,11 @@ export default class Game {
         gradient.addColorStop("1.0", "#DDD830");
         this.ctx.clearRect(0, 0, DIM_X, DIM_Y);
         this.ctx.fillStyle = gradient;
-        this.ctx.font = "48px unicorn";
+        this.ctx.font = "48px Orbitron";
         this.centerText(title, y);
         
         this.ctx.fillStyle = color;
-        this.ctx.font = "24px unicorn";
+        this.ctx.font = "24px Orbitron";
         this.centerText(enter, y + 30);
         document.addEventListener('keydown', e => this.gameStart(e));
     }
