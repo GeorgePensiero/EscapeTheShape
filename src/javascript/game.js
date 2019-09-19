@@ -168,39 +168,6 @@ export default class Game {
         
     }
 
-    gameOver(){
-        if(this.score > this.highScore) {
-            this.highScore = this.score;
-        }
-        this.themeSong.stop();
-        if(this.gOLoop){
-            this.gameOverSong.play();
-            this.gOLoop = false;
-        }
-        const canvas = document.getElementById("myCanvas");
-        canvas.style.backgroundColor = ("#48639c");
-        this.walls = [];
-        this.speed = [-.001, .001];
-        let y = this.canvas.height / 2;
-        let color = "#FF0000";
-        let title = "Game Over";
-        let enter = "Try again";
-        let score = `Score: ${this.score}`;
-        let highScore = `High Score: ${this.highScore}`;
-        this.ctx.clearRect(0, 0, DIM_X, DIM_Y);
-        this.ctx.fillStyle = color;
-        this.ctx.font = "48px Orbitron";
-        this.centerText(title, y + 60);
-        
-        this.ctx.font = "48px Orbitron";
-        this.centerText(highScore, y - 100);
-        this.centerText(score, y - 50);
-        this.ctx.fillStyle = color;
-        this.ctx.font = "24px Orbitron";
-        this.centerText(enter, y + 100);
-        document.addEventListener('keydown', e => this.gameStart(e));
-    }
-
     checkCollision(player, gap){
         let collision = false;
         let gapPos = gap.getPosition();
@@ -252,6 +219,42 @@ export default class Game {
         this.ctx.fillStyle = color;
         this.ctx.font = "24px Orbitron";
         this.centerText(enter, y + 30);
+        document.addEventListener('keydown', e => this.gameStart(e));
+    }
+
+    gameOver() {
+        if (this.score > this.highScore) {
+            this.highScore = this.score;
+        }
+        this.themeSong.stop();
+        if (this.gOLoop) {
+            this.gameOverSong.play();
+            this.gOLoop = false;
+        }
+        const canvas = document.getElementById("myCanvas");
+        canvas.style.backgroundColor = ("#48639c");
+        const gradient = this.ctx.createLinearGradient(0, 0, this.canvas.width, 0);
+        gradient.addColorStop("0", "#262224");
+        gradient.addColorStop("0.5", "#F1DF0C");
+        gradient.addColorStop("1.0", "#F7042C");
+        this.walls = [];
+        this.speed = [-.001, .001];
+        let y = this.canvas.height / 2;
+        let color = "#FF0000";
+        let title = "Game Over";
+        let enter = "Press enter to try again";
+        let score = `Score: ${this.score}`;
+        let highScore = `High Score: ${this.highScore}`;
+        this.ctx.clearRect(0, 0, DIM_X, DIM_Y);
+        this.ctx.fillStyle = gradient;
+        this.ctx.font = "48px Orbitron";
+        this.centerText(title, y + 60);
+
+        this.ctx.font = "48px Orbitron";
+        this.centerText(highScore, y - 120);
+        this.centerText(score, y - 50);
+        this.ctx.font = "24px Orbitron";
+        this.centerText(enter, y + 100);
         document.addEventListener('keydown', e => this.gameStart(e));
     }
 
