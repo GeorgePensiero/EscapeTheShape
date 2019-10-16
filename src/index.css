@@ -19,6 +19,7 @@ body{
 .author-info{
     display: flex;
     padding-top: 50px;
+    margin-top: 50px;
 }
 
 .author-info a{
