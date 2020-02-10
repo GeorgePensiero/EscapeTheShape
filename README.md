@@ -16,14 +16,6 @@ In Escape the shape players will be able to
 3. Rack up their score by staying alive for longer periods of time
 4. View their score on a scoreboard when they finally get hit by a shape
 
-## Wireframes
-
-The app will consist of a single page with the title of the game on the top of the screen, a play button in the bottom left corner, a score/timer in the top right, and 
-developer information on the right side. Upon losing, a game over tag will pop up with the user's score, and a button asking
-if the player would like to play again. 
-
-![wireframe](wireframe.jpg)
-
 ## Architecture and technologies
 
 Escape the Shape will be implemented with the following technologies: 
