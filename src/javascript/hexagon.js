@@ -11,7 +11,6 @@ export default class Hexagon{
     }
 
     draw(){
-
         const cx = 1000 + this.distance;
         const cy = 600 + this.distance;
         this.ctx.beginPath();
@@ -26,7 +25,7 @@ export default class Hexagon{
         }
         this.ctx.stroke();
         
-        this.ctx.lineWidth = 30;
+        this.ctx.lineWidth = 20;
         this.ctx.stroke();
         this.ctx.restore();
         this.ctx.closePath();

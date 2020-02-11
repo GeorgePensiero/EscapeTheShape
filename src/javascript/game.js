@@ -4,6 +4,8 @@ import Hexagon from './hexagon';
 import Sound from './sound';
 const DIM_X = 1000;
 const DIM_Y = 600;
+const CENTER_X = DIM_X / 2;
+const CENTER_Y = DIM_Y / 2;
 const COLOR_SCHEME = ["#ffce00", "c9ff00", "#49ff00", "#00ffec", "#00d2ff"]
 const colors = [
     "#00bdff",
@@ -26,6 +28,7 @@ export default class Game {
         this.themeSong = new Sound("gametheme.mp3");
         this.gameOverSong = new Sound("gameOver.mp3");
         this.gOLoop = true;
+        this.rotation = 0;
     }
 
     randomColor(colors) {
@@ -39,7 +42,13 @@ export default class Game {
     }
 
     rotate(){
+        
         this.ctx.beginPath();
+        this.ctx.translate(CENTER_X, CENTER_Y);
+        this.ctx.rotate(this.rotation * Math.PI / 180);
+        this.ctx.translate(-CENTER_X, -CENTER_Y);
+        this.rotation++;
+        if(this.rotation === 360) this.rotation = 0;
     }
 
     init(){
@@ -104,7 +113,14 @@ export default class Game {
 
     showScore(){
         this.ctx.beginPath();
+        // this.ctx.translate(CENTER_X, CENTER_Y);
+        // let origin = (2 * Math.PI) - (this.rotation * Math.PI / 180);
+        // console.log(origin);
+        // this.ctx.rotate(origin);
+        // this.ctx.translate(-CENTER_X, -CENTER_Y);
         this.ctx.font = "20px Orbitron";
+        // let x = (this.canvas.width - 100) * Math.cos(-this.rotation) - (30) * Math.cos(-this.rotation);
+        // let y = (this.canvas.width - 100) * Math.sin(-this.rotation) + 30 * Math.cos(-this.rotation)
         this.ctx.fillText("Score: " + this.score, this.canvas.width - 100, 30);
         this.ctx.closePath();
     }
@@ -118,8 +134,11 @@ export default class Game {
     
     draw() {
         this.ctx.clearRect(0, 0, DIM_X, DIM_Y);
+        this.showScore();
         const centerX = DIM_X / 2;
         const centerY = DIM_Y / 2;
+        this.ctx.save();
+        this.rotate();
         this.ctx.beginPath();
         this.ctx.lineWidth = 1;
         this.ctx.strokeStyle = "black";
@@ -131,7 +150,7 @@ export default class Game {
             // wall.gap.update();
         })
         this.player.draw(5);
-    
+        this.ctx.restore();
         const doWallsExist = this.walls.length > 0;
         // if(doWallsExist){
 
@@ -146,7 +165,6 @@ export default class Game {
                 // console.log(this.walls[0].angle);
             // }
         // }
-        this.showScore();
         // this.ctx.stroke();
         // this.ctx.closePath();
     }
@@ -157,7 +175,7 @@ export default class Game {
             this.timer = setTimeout(() => this.addWall(), wallSpace);
         }
         if (this.walls.length > 0 && this.walls[0].distance < 30) { this.walls.shift()}
-        this.increaseDifficulty();
+        // this.increaseDifficulty();
         this.draw();
         this.updateScore();
         }
