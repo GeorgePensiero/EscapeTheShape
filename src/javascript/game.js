@@ -1,6 +1,6 @@
 import Player from "./player";
 import Wall from "./wall";
-import Circle from './circle';
+import Hexagon from './hexagon';
 import Sound from './sound';
 const DIM_X = 1000;
 const DIM_Y = 600;
@@ -38,6 +38,10 @@ export default class Game {
         this.bg = canvas.style.backgroundColor = randomColor;
     }
 
+    rotate(){
+        this.ctx.beginPath();
+    }
+
     init(){
         if(!this.inGame){
             this.startScreen();
@@ -51,7 +55,7 @@ export default class Game {
 
 
     addWall(){
-        const wall = new Wall(this.ctx, this.canvas.width / 2, this.canvas.height / 2, this.canvas.width / 2, "#223142", this.speed[Math.floor(Math.random() * this.speed.length)])
+        const wall = new Hexagon(this.ctx, DIM_X / 2, DIM_Y / 2, 800);
         this.walls.push(wall);
         this.timer = null;
     }
@@ -129,19 +133,19 @@ export default class Game {
         this.player.draw(5);
     
         const doWallsExist = this.walls.length > 0;
-        if(doWallsExist){
+        // if(doWallsExist){
 
             //TODO: we check for collision when the wall is literally ontop of the player
             // maybe find a sweet spot with this.player.radius + 1 or something cause the triangle has
             // a size to it.
-            const isWallOnPlayer = this.walls[0].radius <= this.player.radius + this.player.size + 6 && this.walls[0].radius >= this.player.radius;
-            if (isWallOnPlayer){
-                if(!this.checkCollision(this.player, this.walls[0].gap)){
-                    this.dead = true;
-                };
+            // const isWallOnPlayer = this.walls[0].radius <= this.player.radius + this.player.size + 6 && this.walls[0].radius >= this.player.radius;
+            // if (isWallOnPlayer){
+            //     if(!this.checkCollision(this.player, this.walls[0].gap)){
+            //         this.dead = true;
+            //     };
                 // console.log(this.walls[0].angle);
-            }
-        }
+            // }
+        // }
         this.showScore();
         // this.ctx.stroke();
         // this.ctx.closePath();
@@ -152,7 +156,7 @@ export default class Game {
         if(this.walls.length < 8 && this.timer === null){
             this.timer = setTimeout(() => this.addWall(), wallSpace);
         }
-        if (this.walls.length > 0 && this.walls[0].radius < 30) { this.walls.shift()}
+        if (this.walls.length > 0 && this.walls[0].distance < 30) { this.walls.shift()}
         this.increaseDifficulty();
         this.draw();
         this.updateScore();
@@ -160,7 +164,7 @@ export default class Game {
 
     updateScore(){
         if(this.walls.length){
-            if (this.walls[0].radius === 32) { 
+            if (this.walls[0].distance === 32) { 
                 this.score += 1;
                 this.changeBG();
             }

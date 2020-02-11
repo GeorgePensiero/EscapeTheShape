@@ -1,17 +1,13 @@
 
 
-export default class Octagon{
-    constructor(ctx, x, y, distance, rotation){
+export default class Hexagon{
+    constructor(ctx, x, y, distance){
         this.ctx = ctx;
         this.x = x;
         this.y = y;
         this.distance = distance;
-        this.rotation = rotation;
-        this.numSides = 8;
-        this.gapStart;
-        this.angle = 30;
-        this.gapEnd;
-        console.log(this.rotation);
+        this.numSides = 6;
+        this.angle = Math.floor(Math.random() * 360);
     }
 
     draw(){
@@ -20,7 +16,6 @@ export default class Octagon{
         const cy = 600 + this.distance;
         this.ctx.beginPath();
         this.ctx.save();
-        this.angle = this.angle + this.rotation;
         this.ctx.translate(this.x, this.y);
         this.ctx.rotate((this.angle) * Math.PI / 180);
         this.ctx.translate(-this.x, -this.y);
@@ -35,24 +30,14 @@ export default class Octagon{
         this.ctx.stroke();
         this.ctx.restore();
         this.ctx.closePath();
-        // console.log(this.getGapPosition());
-        // console.log(this.distance);
-        const start = [(this.x + this.distance * Math.cos(7 * 2 * Math.PI / this.numSides), (this.y + this.distance * Math.sin(7 * 2 * Math.PI / this.numSides)))];
+        
+        // const start = [(this.x + this.distance * Math.cos(7 * 2 * Math.PI / this.numSides), (this.y + this.distance * Math.sin(7 * 2 * Math.PI / this.numSides)))];
     }
 
     update(){
         this.distance -= 3;
-        this.rotation += 1;
         this.draw();
     }
 
-    getGapPosition(){
-        let x1 = this.x + this.distance * Math.cos(7 * 2 * Math.PI / this.numSides);
-        let x2 = this.x + this.distance * Math.cos(8 * 2 * Math.PI / this.numSides);
-        let y1 = this.y + this.distance * Math.sin(7 * 2 * Math.PI / this.numSides);
-        let y2 = this.y + this.distance * Math.sin(8 * 2 * Math.PI / this.numSides)
-        position = {
-            
-        }
-    }
+    
 }
